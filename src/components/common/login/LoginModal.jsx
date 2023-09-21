@@ -66,6 +66,9 @@ const LoginModal = () => {
             <div className="modalWrapper">
                 <div className="modalHeader">
                     <h4>Login</h4>
+                    <h5>
+                        <em>Welcome to Nob Files, login to continue</em>
+                    </h5>
                     <button
                         type="button"
                         id="modalClose"

@@ -1,3 +1,5 @@
+import { useContext, useEffect } from 'react';
+import { DataContext } from './dataContext/DataContext';
 import Home from './components/Home';
 import ImageGallery from './components/images/ImageGallery';
 import Videos from './components/videos/Videos';
@@ -13,6 +15,12 @@ import Search from './components/common/Search';
 import LoginModal from './components/common/login/LoginModal';
 
 function App() {
+  const { loggedIn, setIsModalOpen } = useContext(DataContext)
+
+  useEffect(() => {
+    !loggedIn ? setIsModalOpen(true) : setIsModalOpen(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn])
 
   return (
     <div className="App">

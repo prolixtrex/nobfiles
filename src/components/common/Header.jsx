@@ -47,11 +47,6 @@ const Options = () => {
                         : "All FIles"}
                 </h4>
             </div>
-            <em>
-                {!loggedIn
-                    ? "You must be logged in to rearrange the photos"
-                    : "Logged in"}
-            </em>
             <div>
                 <select
                     name="filter"
