@@ -65,21 +65,9 @@ const LoginModal = () => {
         <div className={`${isModalOpen ? "modal" : "modal close"}`}>
             <div className="modalWrapper">
                 <div className="modalHeader">
-                    <h4>Login</h4>
-                    <h5>
+                    <h4>
                         <em>Welcome to Nob Files, login to continue</em>
-                    </h5>
-                    <button
-                        type="button"
-                        id="modalClose"
-                        onClick={() => {
-                            setIsModalOpen(false);
-                            setEmail("");
-                            setPassword("");
-                        }}
-                    >
-                        Close
-                    </button>
+                    </h4>
                 </div>
                 <div className="modalBody">
                     <form onSubmit={handleSignIn}>
