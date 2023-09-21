@@ -1,0 +1,46 @@
+.login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.login #login {
+    display: flex;
+    padding: 5px 20px;
+    gap: 10px;
+    border-radius: 12px;
+}
+
+.login button {
+    font-size: 16px;
+    padding: 2px 25px;
+    background-color: var(--backgroundColor);
+    border: 1px solid var(--borderColor);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.login button:hover {
+    background-color: var(--borderColor);
+}
+
+@media screen and (max-width: 612px) {
+    .login {
+        justify-self: flex-end;
+    }
+
+    .mobileSidebar.close #login p {
+        display: none;
+    }
+
+    .login #login {
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .modal {
+        width: 50%;
+    }
+}

@@ -1,0 +1,50 @@
+.header {
+    height: 40px;
+    width: calc(100% - 12%);
+    position: absolute;
+    top: 0;
+    right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    z-index: 1;
+    border-bottom: 1px solid var(--borderColor);
+    margin-top: 1px;
+    padding: 0 30px;
+}
+
+.header .title h4 {
+    font-style: italic;
+}
+
+.header button {
+    padding: 5px 25px;
+    border-radius: 10px;
+    background-color: var(--backgroundColor);
+    border: 1px solid var(--borderColor);
+    cursor: pointer;
+}
+
+.header button:hover {
+    background-color: var(--borderColor);
+}
+
+.header #filter {
+    background-color: var(--backgroundColor);
+    padding: 4px 15px;
+    border: 1px solid var(--borderColor);
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.header #filter:focus {
+    /* border: none; */
+    outline: none;
+}
+
+@media screen and (max-width: 612px) {
+    .header {
+        display: none;
+    }
+}

@@ -1,0 +1,38 @@
+.main .uploadPage {
+    width: 700px;
+    height: calc(100vh - 100px);
+    border: 1px solid var(--borderColor);
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 20px;
+}
+
+.uploadPage .header {
+    height: 40px;
+    border-bottom: 1px solid var(--borderColor);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploadPage .preview {
+    flex-grow: 1;
+}
+
+.uploadPage .browse {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadPage .infos {
+    height: 80px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 10px;
+}
