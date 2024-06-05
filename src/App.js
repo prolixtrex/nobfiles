@@ -28,7 +28,7 @@ function App() {
   // console.log(currentURL === "https://nobfiles.netlify.app/resetPassword")
 
   useEffect(() => {
-    if (!loggedIn && currentURL !== "http://localhost:3000/profilePage") {
+    if (!loggedIn && currentURL !== "https://nobfiles.netlify.app/resetPassword") {
       navigate("/")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
