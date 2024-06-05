@@ -8,7 +8,7 @@ import Sidebar from './components/sidebar/Sidebar';
 import UploadPage from './components/uploadPage/UploadPage';
 import Viewer from './components/viewer/Viewer';
 import MissingPage from "./components/missingPage/MissingPage"
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import MobileSidebar from './components/mobileSidebar/MobileSidebar';
 import Search from './components/common/Search';
@@ -21,9 +21,16 @@ import ForgotPassword from './components/common/account/ForgotPassword';
 function App() {
   const { loggedIn } = useContext(DataContext)
   const navigate = useNavigate()
+  const location = useLocation()
+  const currentURL = `${window.location.origin}${location.pathname}${location.search}`;
+
+  console.log(currentURL === "http://localhost:3000/profilePage")
+  // console.log(currentURL === "https://nobfiles.netlify.app/resetPassword")
 
   useEffect(() => {
-    !loggedIn && navigate("/")
+    if (!loggedIn && currentURL !== "http://localhost:3000/profilePage") {
+      navigate("/")
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
