@@ -22,10 +22,10 @@ function App() {
   const { loggedIn } = useContext(DataContext)
   const navigate = useNavigate()
   const location = useLocation()
-  const currentURL = `${window.location.origin}${location.pathname}${location.search}`;
+  const baseURL = `${window.location.origin}${location.pathname}`;
 
   useEffect(() => {
-    if (!loggedIn && currentURL !== "https://nobfiles.netlify.app/resetPassword") {
+    if (!loggedIn && baseURL !== "https://nobfiles.netlify.app/resetPassword") {
       navigate("/")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
