@@ -24,9 +24,6 @@ function App() {
   const location = useLocation()
   const currentURL = `${window.location.origin}${location.pathname}${location.search}`;
 
-  console.log(currentURL === "http://localhost:3000/profilePage")
-  // console.log(currentURL === "https://nobfiles.netlify.app/resetPassword")
-
   useEffect(() => {
     if (!loggedIn && currentURL !== "https://nobfiles.netlify.app/resetPassword") {
       navigate("/")

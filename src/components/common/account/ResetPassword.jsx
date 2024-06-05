@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getAuth, updatePassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 const ResetPassword = () => {
     const [firebaseError, setFirebaseError] = useState(null);
@@ -53,6 +54,7 @@ const ResetPassword = () => {
                             onChange={(e) => {
                                 setNewPassword(e.target.value);
                                 setFirebaseError(null);
+                                setPasswordMissmatch(null);
                             }}
                             required
                         />
@@ -66,6 +68,7 @@ const ResetPassword = () => {
                             onChange={(e) => {
                                 setConfirmPassword(e.target.value);
                                 setFirebaseError(null);
+                                setPasswordMissmatch(null);
                             }}
                             required
                         />
@@ -76,6 +79,11 @@ const ResetPassword = () => {
                             value="Change password"
                             id="submit"
                         />
+                    </div>
+                    <div>
+                        <i>
+                            go back to <Link to="/">login</Link>
+                        </i>
                     </div>
                 </div>
             </form>
