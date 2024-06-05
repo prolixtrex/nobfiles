@@ -1,0 +1,101 @@
+.profilePage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profilePage button {
+    cursor: pointer;
+    border: 1px solid var(--borderColor);
+    background-color: var(--backgroundColor);
+    font-size: 16px;
+    padding: var(--buttonPadding);
+    border-radius: var(--buttonRadius);
+    margin: 0px 5px;
+}
+
+.profilePage input {
+    background-color: var(--backgroundColor);
+    font-size: 16px;
+    outline: none;
+    border: 1px solid var(--borderColor);
+    border-radius: 5px;
+    padding: var(--inputPadding);
+    margin-left: 7px;
+}
+
+.profilePage .profileWrapper {
+    height: 98%;
+    width: 98%;
+    border: 1px solid var(--borderColor);
+    border-radius: var(--borderRadius);
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.profileWrapper .profilePic {
+    min-height: 200px;
+    border-bottom: 1px solid var(--borderColor);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 0px 5px 10px;
+}
+
+.profilePic .imageWrapper {
+    height: 10rem;
+    width: 10rem;
+    border: 1px solid var(--borderColor);
+    border-radius: 50%;
+}
+
+.profilePic .imageWrapper .avater {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    color: var(--borderColor);
+}
+
+.profileWrapper .profileInfo {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.profileInfo .editInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profileWrapper .controls {
+    min-height: 100px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileWrapper .controls > div {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profileWrapper .controls .passwords {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

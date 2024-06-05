@@ -2,7 +2,7 @@ import { useState } from "react";
 import noban from "../../assets/logo/noban.png";
 import "./mobileSidebar.css";
 import Tags from "../common/Tags";
-import Login from "../common/login/Login";
+import LogOutBtn from "../common/account/LogoutBtn";
 import Categories from "../common/Categories";
 
 const MobileSidebar = () => {
@@ -15,7 +15,7 @@ const MobileSidebar = () => {
             </button>
             <Categories />
             <Tags />
-            <Login />
+            <LogOutBtn />
         </aside>
     );
 };

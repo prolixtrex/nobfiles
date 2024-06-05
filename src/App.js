@@ -8,35 +8,47 @@ import Sidebar from './components/sidebar/Sidebar';
 import UploadPage from './components/uploadPage/UploadPage';
 import Viewer from './components/viewer/Viewer';
 import MissingPage from "./components/missingPage/MissingPage"
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import MobileSidebar from './components/mobileSidebar/MobileSidebar';
 import Search from './components/common/Search';
-import LoginModal from './components/common/login/LoginModal';
+import Login from './components/common/account/Login';
+import Signup from './components/common/account/Signup';
+import ProfilePage from './components/profilePage/ProfilePage';
+import ResetPassword from './components/common/account/ResetPassword';
+import ForgotPassword from './components/common/account/ForgotPassword';
 
 function App() {
-  const { loggedIn, setIsModalOpen } = useContext(DataContext)
+  const { loggedIn } = useContext(DataContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    !loggedIn ? setIsModalOpen(true) : setIsModalOpen(false)
+    !loggedIn && navigate("/")
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn])
+  }, [])
 
   return (
     <div className="App">
-      <Sidebar />
-      <MobileSidebar />
-      <div className='hideOnDesktop'>
-        <Search />
-      </div>
-      <LoginModal />
+      {loggedIn &&
+        <>
+          <Sidebar />
+          <MobileSidebar />
+          <div className='hideOnDesktop'>
+            <Search />
+          </div>
+        </>
+      }
       <Routes>
-        <Route path="/" Component={Home} />
+        <Route path="/" element={!loggedIn ? <Login /> : <Home />} />
         <Route path="/images" Component={ImageGallery} />
         <Route path="/videos" Component={Videos} />
         <Route path="/documents" Component={Documents} />
         <Route path="/upload" Component={UploadPage} />
         <Route path="/:title" Component={Viewer} />
+        <Route path="/signup" Component={Signup} />
+        <Route path="/forgotPassword" Component={ForgotPassword} />
+        <Route path='/profilePage' Component={ProfilePage} />
+        <Route path='/resetPassword' Component={ResetPassword} />
         <Route path="*" Component={MissingPage} />
       </Routes>
     </div>

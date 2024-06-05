@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import Search from "../common/Search";
 import Categories from "../common/Categories";
 import Tags from "../common/Tags";
-import Login from "../common/login/Login";
+import LogOutBtn from "../common/account/LogoutBtn";
 import "./sidebar.css";
 
 const Sidebar = () => {
@@ -13,7 +13,7 @@ const Sidebar = () => {
             <Search />
             <Categories />
             <Tags />
-            <Login />
+            <LogOutBtn />
         </aside>
     );
 };

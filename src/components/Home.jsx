@@ -6,10 +6,11 @@ import "./home.css";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-    const { setActiveCat, photos, videos, documents } = useContext(DataContext);
+    const { setActivePage, photos, videos, documents } =
+        useContext(DataContext);
 
     useEffect(() => {
-        setActiveCat("home");
+        setActivePage("home");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -44,7 +45,7 @@ const Home = () => {
             <div className="sections">
                 <div className="section-title">
                     <h2>Videos</h2>
-                    <Link to={"/vides"}>
+                    <Link to={"/videos"}>
                         <i>
                             See more <PiCaretDoubleRight />
                         </i>

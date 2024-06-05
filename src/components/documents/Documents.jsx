@@ -4,10 +4,10 @@ import Header from "../common/Header";
 import "./documents.css";
 
 const Documents = () => {
-    const { setActiveCat } = useContext(DataContext);
+    const { setActivePage } = useContext(DataContext);
 
     useEffect(() => {
-        setActiveCat("documents");
+        setActivePage("documents");
     });
 
     return (

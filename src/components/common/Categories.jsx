@@ -7,13 +7,13 @@ import "./categories.css";
 import { Link } from "react-router-dom";
 
 const Categories = () => {
-    const { activeCat, setActiveCat } = useContext(DataContext);
+    const { activePage } = useContext(DataContext);
 
     return (
         <div className="categories">
             <h2>CATEGORIES</h2>
             <ul>
-                <li className={activeCat === "home" ? "active" : ""}>
+                <li className={activePage === "home" ? "active" : ""}>
                     <Link to={"/"}>
                         <button>
                             <AiOutlineHome className="icon" />
@@ -21,7 +21,7 @@ const Categories = () => {
                         </button>
                     </Link>
                 </li>
-                <li className={activeCat === "images" ? "active" : ""}>
+                <li className={activePage === "images" ? "active" : ""}>
                     <Link to={"/images"}>
                         <button>
                             <BsImage className="icon" />
@@ -29,7 +29,7 @@ const Categories = () => {
                         </button>
                     </Link>
                 </li>
-                <li className={activeCat === "videos" ? "active" : ""}>
+                <li className={activePage === "videos" ? "active" : ""}>
                     <Link to={"/videos"}>
                         <button>
                             <GoVideo className="icon" />
@@ -37,7 +37,7 @@ const Categories = () => {
                         </button>
                     </Link>
                 </li>
-                <li className={activeCat === "documents" ? "active" : ""}>
+                <li className={activePage === "documents" ? "active" : ""}>
                     <Link to={"/documents"}>
                         <button>
                             <AiOutlineFileWord className="icon" />

@@ -4,10 +4,10 @@ import Header from "../common/Header";
 import "./videos.css";
 
 const Videos = () => {
-    const { setActiveCat } = useContext(DataContext);
+    const { setActivePage } = useContext(DataContext);
 
     useEffect(() => {
-        setActiveCat("videos");
+        setActivePage("videos");
     });
 
     return (

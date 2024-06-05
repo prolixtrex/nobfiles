@@ -1,29 +1,22 @@
-.modal {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
+.account {
+    width: 100vw;
     height: 100%;
-    /* background-color: var(--backgroundColor); */
-    background-color: #ffc632;
+    background-color: var(--welcomeBg);
     display: grid;
     place-content: center;
-    z-index: 3;
 }
 
-.modal.close {
-    display: none;
-}
-
-.modal .modalWrapper {
+.account .accountWrapper {
     width: 500px;
-    height: 250px;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
     border: 1px solid var(--borderColor);
     border-radius: 20px;
     background-color: var(--borderColor);
 }
 
-.modal .modalHeader {
+.account .accountHeader {
     height: 50px;
     width: 100%;
     display: flex;
@@ -33,7 +26,7 @@
     border-bottom: 1px solid white;
 }
 
-.modal .modalHeader #modalClose {
+.account .accountHeader #accountClose {
     border: 1px solid white;
     background-color: var(--backgroundColor);
     padding: 5px 15px;
@@ -41,13 +34,13 @@
     cursor: pointer;
 }
 
-.modal .modalBody {
-    height: calc(100% - 50px);
+.account .accountBody {
+    padding: 10px;
     display: grid;
     place-content: center;
 }
 
-.modal .modalBody div {
+.account .accountBody div {
     height: 30px;
     display: flex;
     justify-content: flex-end;
@@ -55,7 +48,7 @@
     margin-bottom: 10px;
 }
 
-.modal .modalBody input {
+.account .accountBody input {
     font-size: 18px;
     padding: 5px;
     border: 1px solid white;
@@ -63,28 +56,33 @@
     border-radius: 5px;
 }
 
-.modal .modalBody input[type="submit"] {
+.account .accountBody input[type="submit"] {
     cursor: pointer;
 }
 
-.modal .modalBody input:focus {
+.account .accountBody input:focus {
     outline: none;
 }
 
+.erroraccount {
+    height: 18px;
+    width: 100%;
+}
+
 @media screen and (max-width: 612px) {
-    .modal .modalWrapper {
+    .account .accountWrapper {
         width: 300px;
         height: 350px;
     }
 
-    .modal .modalBody form {
+    .account .accountBody form {
         height: 200px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 
-    .modal .modalBody div {
+    .account .accountBody div {
         flex-direction: column;
     }
 }

@@ -7,6 +7,11 @@
 :root {
     --borderColor: #ff9200;
     --backgroundColor: hsla(34, 100%, 50%, 0.3);
+    --welcomeBg: #ffc632;
+    --borderRadius: 10px;
+    --buttonRadius: 5px;
+    --buttonPadding: 3px;
+    --inputPadding: 3px;
 }
 
 body {

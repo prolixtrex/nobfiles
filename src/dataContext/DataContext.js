@@ -1,4 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { firestoreDb, storage } from "../firebase/firebase";
+import { ref, getDownloadURL } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 
 //import images
 import image1 from "../assets/images/image1.jpg";
@@ -79,12 +83,17 @@ const initialImages = [
 
 const DataProvider = ({ children }) => {
     const [files, setFiles] = useState([])
-    const [activeCat, setActiveCat] = useState("home");
+    const [activePage, setActivePage] = useState("home");
     const [tagNames, setTagsNames] = useState(["All Files", "summer", "spring", "winter"])
     const [loggedIn, setLoggedIn] = useState(false)
     const [user, setUser] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [activeTag, setActiveTag] = useState(tagNames[0]);
+    const [profilePicURL, setProfilePicURL] = useState("")
+    const auth = getAuth()
+
+    const [userFirstName, setUserFirstName] = useState("")
+    const [userLastName, setUserLastName] = useState("")
+    const [userEmail, setUserEmail] = useState("")
 
     const [photos, setPhotos] = useState(initialImages);
     const [videos, setVideos] = useState([])
@@ -104,7 +113,42 @@ const DataProvider = ({ children }) => {
         tagNames[tagNames.indexOf(oldName)] = newName
     };
 
-    return <DataContext.Provider value={{ activeTag, setActiveTag, isModalOpen, setIsModalOpen, initialImages, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, photos, setPhotos, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activeCat, setActiveCat }}>
+    useEffect(() => {
+        const getData = async () => {
+            setLoggedIn(true)
+            const docRef = doc(firestoreDb, "users", user.uid);
+            const docSnap = await getDoc(docRef);
+            const profileRef = ref(storage, `user/${auth.currentUser.uid}/profilePicture/profilePicture`)
+
+            if (docSnap.exists()) {
+                const userData = docSnap.data()
+                setUserFirstName(userData.firstName)
+                setUserLastName(userData.lastName)
+                setUserEmail(user.email)
+                // unsubscribe();
+            } else {
+                // docSnap.data() will be undefined in this case
+                console.log("No such document!");
+            }
+
+            console.log(profileRef)
+
+            getDownloadURL(profileRef).then((url) => {
+                setProfilePicURL(url)
+            }).catch((error) => {
+                // alert("Unable to fetch profile picture, Please reload")
+            })
+        }
+
+        user && getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user])
+
+    console.log(user?.displayName)
+
+    return <DataContext.Provider value={{
+        activeTag, setActiveTag, initialImages, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, photos, setPhotos, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL
+    }}>
         {children}
     </DataContext.Provider>
 }

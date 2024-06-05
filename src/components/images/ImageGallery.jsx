@@ -4,10 +4,10 @@ import ImageContainer from "./ImageContainer";
 import "./images.css";
 
 const ImageGallery = () => {
-    const { tagNames, setActiveCat } = useContext(DataContext);
+    const { tagNames, setActivePage } = useContext(DataContext);
 
     useEffect(() => {
-        setActiveCat("images");
+        setActivePage("images");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

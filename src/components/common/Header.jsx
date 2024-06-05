@@ -6,22 +6,21 @@ import "./header.css";
 const Options = () => {
     const {
         tagNames,
-        activeCat,
+        activePage,
         initialImages,
         setPhotos,
         photos,
         videos,
         documents,
-        loggedIn,
         activeTag,
         setActiveTag,
     } = useContext(DataContext);
     const [filter, setFilter] = useState("All Files");
 
     const numOfFiles =
-        activeCat === "images"
+        activePage === "images"
             ? photos.length
-            : activeCat === "videos"
+            : activePage === "videos"
             ? videos.length
             : documents.length;
 
@@ -40,35 +39,49 @@ const Options = () => {
 
     return (
         <div className="header">
-            <div className="title">
-                <h4>
-                    {activeCat !== "home"
-                        ? `(${numOfFiles} ${activeCat})`
-                        : "All FIles"}
-                </h4>
-            </div>
-            <div>
-                <select
-                    name="filter"
-                    id="filter"
-                    onChange={(e) => setFilter(e.target.value)}
-                >
-                    {tagNames.map((tag) => (
-                        <option
-                            key={tag}
-                            value={tag}
-                            selected={activeTag === tag ? true : false}
+            {activePage === "profilePage" ? (
+                <>
+                    <div>
+                        <h3>Profile</h3>
+                    </div>
+                    <div>
+                        <button>Delete Account</button>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className="title">
+                        <h4>
+                            {activePage !== "home"
+                                ? `(${numOfFiles} ${activePage})`
+                                : "All FIles"}
+                        </h4>
+                    </div>
+                    <div>
+                        <select
+                            name="filter"
+                            id="filter"
+                            onChange={(e) => setFilter(e.target.value)}
                         >
-                            {tag}
-                        </option>
-                    ))}
-                </select>
-                <Link to={`/upload`}>
-                    <button>
-                        Add {activeCat !== "home" ? activeCat : "Files"}
-                    </button>
-                </Link>
-            </div>
+                            {tagNames.map((tag) => (
+                                <option
+                                    key={tag}
+                                    defaultValue={tag}
+                                    selected={activeTag === tag ? true : false}
+                                >
+                                    {tag}
+                                </option>
+                            ))}
+                        </select>
+                        <Link to={`/upload`}>
+                            <button>
+                                Add{" "}
+                                {activePage !== "home" ? activePage : "Files"}
+                            </button>
+                        </Link>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

@@ -18,8 +18,6 @@ const ImageContainer = ({ tagName }) => {
         setPhotos(updatedImages);
     };
 
-    console.log(isTouchDevice);
-
     // useEffect(()=> {
     //     const detectDevice = () => {
     //         if("ontouchstart" in window || )

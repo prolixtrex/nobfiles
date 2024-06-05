@@ -5,16 +5,22 @@ import { Link } from "react-router-dom";
 import noban from "../../assets/logo/noban.png";
 
 const Profile = () => {
-    const { files, totalFiles } = useContext(DataContext);
+    const { files, totalFiles, userFirstName } = useContext(DataContext);
 
     return (
         <div className="profile">
-            <div className="profilePix">
-                <img src={noban} alt="noban logo" />
-            </div>
-            <div>
-                <h1>Nob Files</h1>
-            </div>
+            <Link to="/profilePage">
+                <div className="profilePix">
+                    <img src={noban} alt="noban logo" />
+                </div>
+                <div>
+                    {userFirstName ? (
+                        <h1>{userFirstName}</h1>
+                    ) : (
+                        <h1>Nob Files</h1>
+                    )}
+                </div>
+            </Link>
             <div>
                 <p>{totalFiles} files</p>
             </div>

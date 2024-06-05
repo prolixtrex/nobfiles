@@ -1,4 +1,4 @@
-.login {
+.logout {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -6,14 +6,14 @@
     padding-top: 10px;
 }
 
-.login #login {
+.logout #logout {
     display: flex;
     padding: 5px 20px;
     gap: 10px;
     border-radius: 12px;
 }
 
-.login button {
+.logout button {
     font-size: 16px;
     padding: 2px 25px;
     background-color: var(--backgroundColor);
@@ -22,20 +22,20 @@
     cursor: pointer;
 }
 
-.login button:hover {
+.logout button:hover {
     background-color: var(--borderColor);
 }
 
 @media screen and (max-width: 612px) {
-    .login {
+    .logout {
         justify-self: flex-end;
     }
 
-    .mobileSidebar.close #login p {
+    .mobileSidebar.close #logout p {
         display: none;
     }
 
-    .login #login {
+    .logout #logout {
         padding: 5px 10px;
         border-radius: 5px;
     }
