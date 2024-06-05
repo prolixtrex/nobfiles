@@ -31,7 +31,8 @@ const ForgotPassword = () => {
                     });
             }
         } catch (error) {
-            setErrorMessage("error sending password reset", error);
+            console.log(error);
+            // setErrorMessage("error sending password reset", error);
         }
     };
 
