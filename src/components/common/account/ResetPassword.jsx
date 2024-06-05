@@ -1,35 +1,36 @@
 import { useState } from "react";
-import { getAuth, updatePassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { getAuth, confirmPasswordReset } from "firebase/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
-    const [firebaseError, setFirebaseError] = useState(null);
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [firebaseError, setFirebaseError] = useState(null);
     const [passwordMissmatch, setPasswordMissmatch] = useState(null);
+    const [message, setMessage] = useState("");
 
     const auth = getAuth();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const oobCode = queryParams.get("oobCode");
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (newPassword === confirmPassword) {
-            updatePassword(auth.currentUser, newPassword).then(() => {
-                // alert("Your password has been changed successfully");
-                // signOut(auth)
-                //     .then(() => {
-                //         setUser(null);
-                //         setLoggedIn(false);
-                //         navigate("/");
-                //     })
-                //     .catch((error) => {
-                //         console.log(error);
-                //     });
-            });
-        } else {
-            setPasswordMissmatch("Your passwords do not match");
-            return false;
+        if (newPassword !== confirmPassword) {
+            setPasswordMissmatch("Passwords do not match");
+            return;
         }
+
+        confirmPasswordReset(auth, oobCode, newPassword)
+            .then(() => {
+                setMessage("Your password has been changed successfully");
+                navigate("/");
+            })
+            .catch((error) => {
+                setFirebaseError("Error resetting password", error);
+            });
     };
 
     return (
@@ -76,7 +77,7 @@ const ResetPassword = () => {
                     <div>
                         <input
                             type="submit"
-                            value="Change password"
+                            value="Reset password"
                             id="submit"
                         />
                     </div>

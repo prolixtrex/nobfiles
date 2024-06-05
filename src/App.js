@@ -7,7 +7,7 @@ import Documents from './components/documents/Documents'
 import Sidebar from './components/sidebar/Sidebar';
 import UploadPage from './components/uploadPage/UploadPage';
 import Viewer from './components/viewer/Viewer';
-import MissingPage from "./components/missingPage/MissingPage"
+import MissingPage from "./components/missingPage/MissingPage";
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import MobileSidebar from './components/mobileSidebar/MobileSidebar';
