@@ -94,6 +94,7 @@ const DataProvider = ({ children }) => {
     const [userFirstName, setUserFirstName] = useState("")
     const [userLastName, setUserLastName] = useState("")
     const [userEmail, setUserEmail] = useState("")
+    const [displayName, setDisplayName] = useState("")
 
     const [photos, setPhotos] = useState(initialImages);
     const [videos, setVideos] = useState([])
@@ -125,13 +126,12 @@ const DataProvider = ({ children }) => {
                 setUserFirstName(userData.firstName)
                 setUserLastName(userData.lastName)
                 setUserEmail(user.email)
+                setDisplayName(user.displayName)
                 // unsubscribe();
             } else {
                 // docSnap.data() will be undefined in this case
                 console.log("No such document!");
             }
-
-            console.log(profileRef)
 
             getDownloadURL(profileRef).then((url) => {
                 setProfilePicURL(url)
@@ -144,10 +144,8 @@ const DataProvider = ({ children }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
-    console.log(user?.displayName)
-
     return <DataContext.Provider value={{
-        activeTag, setActiveTag, initialImages, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, photos, setPhotos, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL
+        activeTag, setActiveTag, initialImages, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, photos, setPhotos, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL, displayName
     }}>
         {children}
     </DataContext.Provider>

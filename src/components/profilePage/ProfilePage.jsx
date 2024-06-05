@@ -177,8 +177,6 @@ const ProfilePage = () => {
                         setPasswordMissmatch,
                     }}
                 />
-
-                <Link to="/resetPassword">new password page</Link>
             </div>
         </div>
     );

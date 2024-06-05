@@ -25,7 +25,7 @@ const ResetPassword = () => {
 
         confirmPasswordReset(auth, oobCode, newPassword)
             .then(() => {
-                setMessage("Your password has been changed successfully");
+                alert("Your password has been changed successfully");
                 navigate("/");
             })
             .catch((error) => {
