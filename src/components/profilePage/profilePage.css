@@ -78,6 +78,11 @@
     gap: 10px;
 }
 
+.profileInfo .editInfo div {
+    width: 100%;
+    text-align: right;
+}
+
 .profileWrapper .controls {
     min-height: 100px;
     display: flex;

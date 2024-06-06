@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { DataContext } from './dataContext/DataContext';
-import Home from './components/Home';
+import Home from './components/home/Home';
 import ImageGallery from './components/images/ImageGallery';
 import Videos from './components/videos/Videos';
 import Documents from './components/documents/Documents'
@@ -11,7 +11,7 @@ import MissingPage from "./components/missingPage/MissingPage";
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import MobileSidebar from './components/mobileSidebar/MobileSidebar';
-import Search from './components/common/Search';
+import Search from './components/common/search/Search';
 import Login from './components/common/account/Login';
 import Signup from './components/common/account/Signup';
 import ProfilePage from './components/profilePage/ProfilePage';

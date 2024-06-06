@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import noban from "../../assets/logo/noban.png";
 
 const Profile = () => {
-    const { totalFiles, displayName } = useContext(DataContext);
+    const { totalFiles, userDisplayName } = useContext(DataContext);
 
     return (
         <div className="profile">
@@ -14,7 +14,11 @@ const Profile = () => {
                     <img src={noban} alt="noban logo" />
                 </div>
                 <div>
-                    {displayName ? <h1>{displayName}</h1> : <h1>Nob Files</h1>}
+                    {userDisplayName ? (
+                        <h1>{userDisplayName}</h1>
+                    ) : (
+                        <h1>Nob Files</h1>
+                    )}
                 </div>
             </Link>
             <div>

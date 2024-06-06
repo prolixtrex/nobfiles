@@ -88,14 +88,12 @@ const Login = () => {
                             <input type="submit" value="login" id="submit" />
                         </div>
                     </form>
-                    <div>
-                        <i>
-                            <Link to="/forgotPassword">forgot password?</Link>{" "}
-                            or
-                            <Link to="/signup"> signup</Link> to create your
-                            account
-                        </i>
-                    </div>
+                </div>
+                <div className="accountFooter">
+                    <i>
+                        <Link to="/forgotPassword">forgot password?</Link> or
+                        <Link to="/signup"> signup</Link> to create your account
+                    </i>
                 </div>
             </div>
         </div>

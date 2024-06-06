@@ -49,12 +49,12 @@ const ForgotPassword = () => {
                                 value="Send password reset link"
                             />
                         </div>
-                        <div>
-                            <i>
-                                Back to <Link to="/">login</Link>
-                            </i>
-                        </div>
                     </form>
+                </div>
+                <div className="accountFooter">
+                    <i>
+                        Back to <Link to="/">login</Link>
+                    </i>
                 </div>
             </div>
         </div>

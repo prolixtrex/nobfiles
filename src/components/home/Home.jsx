@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
-import { DataContext } from "../dataContext/DataContext";
+import { DataContext } from "../../dataContext/DataContext";
 import { PiCaretDoubleRight } from "react-icons/pi";
-import Header from "./common/Header";
+import Header from "../common/header/Header";
 import "./home.css";
 import { Link } from "react-router-dom";
 

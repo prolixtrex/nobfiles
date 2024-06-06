@@ -5,6 +5,7 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     updateProfile,
+    updateEmail,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { firestoreDb } from "../../../firebase/firebase";
@@ -20,6 +21,7 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [displayName, setDisplayName] = useState("");
     const [passwordMissMatch, setPasswordMissMatch] = useState("");
 
     const [firebaseError, setFirebaseError] = useState(null);
@@ -30,7 +32,8 @@ const Signup = () => {
             firstName !== "" ||
             lastName !== "" ||
             email !== "" ||
-            password !== ""
+            password !== "" ||
+            displayName !== ""
         ) {
             if (password !== confirmPassword) {
                 setPasswordMissMatch("Passwords do not match");
@@ -41,7 +44,7 @@ const Signup = () => {
                         const user = userCredential.user;
                         setUser(user);
                         createAccountInfo(user.uid);
-                        setDisplayName(user, firstName);
+                        setInfo(user, displayName, email);
                         setLoggedIn(true);
                         navigate("/");
                         // ...
@@ -72,11 +75,12 @@ const Signup = () => {
         await setDoc(doc(firestoreDb, "users", uid), data);
     };
 
-    const setDisplayName = async (user, displayName) => {
+    const setInfo = async (user, displayName, email) => {
         try {
             await updateProfile(user, { displayName });
+            await updateEmail(user, { email });
         } catch (error) {
-            console.log("error updating display name");
+            console.log("error setting info");
         }
     };
 
@@ -100,6 +104,9 @@ const Signup = () => {
             case "cpWord":
                 setConfirmPassword(e);
                 break;
+            case "dName":
+                setDisplayName(e);
+                break;
             default:
                 break;
         }
@@ -110,7 +117,7 @@ const Signup = () => {
             <div className="accountWrapper">
                 <div className="accountHeader">
                     <h4>
-                        <em>Create your account</em>
+                        <em>Create your account with Nobfiles</em>
                     </h4>
                 </div>
                 <div className="accountBody">
@@ -118,6 +125,19 @@ const Signup = () => {
                         <div className="erroraccount">
                             {firebaseError && <p>{firebaseError}</p>}
                             {passwordMissMatch && <p>{passwordMissMatch}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="displayName">Display Name:</label>
+                            <input
+                                type="text"
+                                id="displayName"
+                                value={displayName}
+                                onChange={(e) =>
+                                    handleInput("dName", e.target.value)
+                                }
+                                autoFocus
+                                required
+                            />
                         </div>
                         <div>
                             <label htmlFor="firstName">First Name:</label>
@@ -128,7 +148,6 @@ const Signup = () => {
                                 onChange={(e) =>
                                     handleInput("fName", e.target.value)
                                 }
-                                autoFocus
                                 required
                             />
                         </div>
@@ -186,11 +205,11 @@ const Signup = () => {
                             <input type="submit" value="Signup" id="submit" />
                         </div>
                     </form>
-                    <div className="accountFooter">
-                        <i>
-                            have an account? <Link to="/">login</Link> instead.
-                        </i>
-                    </div>
+                </div>
+                <div className="accountFooter">
+                    <i>
+                        have an account? <Link to="/">login</Link> instead.
+                    </i>
                 </div>
             </div>
         </div>

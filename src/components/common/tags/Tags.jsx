@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { DataContext } from "../../dataContext/DataContext";
+import { DataContext } from "../../../dataContext/DataContext";
 import "./tags.css";
 
 const Tags = () => {

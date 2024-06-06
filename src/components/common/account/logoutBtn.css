@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
+    margin-top: 10px;
+    justify-self: flex-end;
 }
 
 .logout #logout {
@@ -27,20 +28,13 @@
 }
 
 @media screen and (max-width: 612px) {
-    .logout {
-        justify-self: flex-end;
-    }
-
     .mobileSidebar.close #logout p {
         display: none;
     }
 
-    .logout #logout {
+    .mobileSidebar.close .logout #logout {
+        width: 100%;
+        border-radius: unset;
         padding: 5px 10px;
-        border-radius: 5px;
-    }
-
-    .modal {
-        width: 50%;
     }
 }

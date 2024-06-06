@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext, useRef } from "react";
-import Header from "../common/Header";
+import { useNavigate } from "react-router-dom";
 import { DataContext } from "../../dataContext/DataContext";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../../firebase/firebase";
+import { firestoreDb, storage } from "../../firebase/firebase";
 import { getAuth, updateProfile, updatePassword, signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { doc, updateDoc } from "firebase/firestore";
+import Header from "../common/header/Header";
 import "./profilePage.css";
 
 import ProfilePic from "./ProfilePic";
@@ -21,17 +22,20 @@ const ProfilePage = () => {
         setProfilePicURL,
         setUser,
         setLoggedIn,
+        user,
+        userDisplayName,
     } = useContext(DataContext);
     const [editInfo, setEditInfo] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
     const [firstName, setFirstName] = useState(userFirstName);
     const [lastName, setLastName] = useState(userLastName);
+    const [displayName, setDisplayName] = useState(userDisplayName);
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [passwordMissmatch, setPasswordMissmatch] = useState("");
+
     const pictureRef = useRef(null);
     const auth = getAuth();
-
     const navigate = useNavigate();
 
     // Create a child reference
@@ -43,8 +47,20 @@ const ProfilePage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const saveEditInfo = () => {
-        setEditInfo(false);
+    const saveEditInfo = async () => {
+        const infoRef = doc(firestoreDb, "users", user.uid);
+
+        try {
+            await updateDoc(infoRef, {
+                firstName: firstName,
+                lastName: lastName,
+            });
+            await updateProfile(user, { displayName });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setEditInfo(false);
+        }
     };
 
     const cancelEdit = (caller) => {
@@ -162,6 +178,9 @@ const ProfilePage = () => {
                         cancelEdit,
                         saveEditInfo,
                         setEditInfo,
+                        userDisplayName,
+                        displayName,
+                        setDisplayName,
                     }}
                 />
                 <PasswordZone

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { DataContext } from "../../dataContext/DataContext";
+import { DataContext } from "../../../dataContext/DataContext";
 import "./search.css";
 
 const Search = () => {

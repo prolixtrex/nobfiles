@@ -1,10 +1,10 @@
 import { useContext, useState, useEffect } from "react";
-import { DataContext } from "../../dataContext/DataContext";
+import { DataContext } from "../../../dataContext/DataContext";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, deleteUser } from "firebase/auth";
 import { doc, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject, listAll } from "firebase/storage";
-import { firestoreDb, storage } from "../../firebase/firebase";
+import { firestoreDb, storage } from "../../../firebase/firebase";
 import "./header.css";
 
 const Options = () => {
@@ -57,12 +57,26 @@ const Options = () => {
     };
 
     const deleteStorageData = async (uid) => {
-        const userStorageRef = ref(storage, `user/${uid}`);
-        const listResults = await listAll(userStorageRef);
-        const deletePromises = listResults.items.map((itemRef) => {
-            return deleteObject(itemRef);
-        });
-        await Promise.all(deletePromises);
+        const listRef = ref(storage, `user/${uid}`);
+
+        const recursiveDelete = async (folderRef) => {
+            const res = await listAll(folderRef);
+
+            // Process all prefixes (sub-folders)
+            for (const prefix of res.prefixes) {
+                await recursiveDelete(prefix);
+            }
+
+            // Process all items (files)
+            const deletePromises = res.items.map((itemRef) => {
+                console.log(`Deleting storage item: ${itemRef.fullPath}`);
+                return deleteObject(itemRef);
+            });
+
+            await Promise.all(deletePromises);
+        };
+
+        await recursiveDelete(listRef);
     };
 
     const numOfFiles =

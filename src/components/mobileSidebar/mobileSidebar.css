@@ -1,23 +1,29 @@
 .mobileSidebar .profile {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
+.mobileSidebar .profile a {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.mobileSidebar .logo {
     width: 60px;
     height: 59px;
-    background-color: transparent;
     align-self: flex-end;
     border: none;
+    background-color: transparent;
 }
 
-.mobileSidebar .profile img {
+.mobileSidebar .logo img {
     width: 100%;
     height: 100%;
-}
-
-.mobileSidebar .categories button {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border-top: 1px solid var(--borderColor);
-    border-bottom: 1px solid var(--borderColor);
-    background-color: var(--backgroundColor);
 }
 
 .mobileSidebar .navText {
@@ -29,7 +35,7 @@
 }
 
 .mobileSidebar .tags {
-    height: 150px;
+    height: 170px;
     display: flex;
     flex-direction: column;
     width: 100%;

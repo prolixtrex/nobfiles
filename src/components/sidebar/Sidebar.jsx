@@ -1,8 +1,8 @@
 import React from "react";
 import Profile from "./Profile";
-import Search from "../common/Search";
-import Categories from "../common/Categories";
-import Tags from "../common/Tags";
+import Search from "../common/search/Search";
+import Categories from "../common/categories/Categories";
+import Tags from "../common/tags/Tags";
 import LogOutBtn from "../common/account/LogoutBtn";
 import "./sidebar.css";
 

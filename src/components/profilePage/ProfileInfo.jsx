@@ -12,6 +12,8 @@ function ProfileInfo({
     cancelEdit,
     saveEditInfo,
     setEditInfo,
+    displayName,
+    setDisplayName,
 }) {
     return (
         <div className="profileInfo">
@@ -42,6 +44,14 @@ function ProfileInfo({
                                 type="text"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            Display Name:{" "}
+                            <input
+                                type="text"
+                                value={displayName}
+                                onChange={(e) => setDisplayName(e.target.value)}
                             />
                         </div>
                     </div>

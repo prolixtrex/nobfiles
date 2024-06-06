@@ -3,7 +3,7 @@ import { DataContext } from "../../dataContext/DataContext";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
-import Header from "../common/Header";
+import Header from "../common/header/Header";
 import ImageBox from "./ImageBox";
 
 const ImageContainer = ({ tagName }) => {

@@ -1,12 +1,12 @@
 import React from "react";
 import { IoPersonCircleSharp } from "react-icons/io5";
 
-function ProfilePic({
+const ProfilePic = ({
     profilePicURL,
     pictureRef,
     handleFileChange,
     changeProfilePicture,
-}) {
+}) => {
     return (
         <div className="profilePic">
             <div className="imageWrapper">
@@ -30,6 +30,6 @@ function ProfilePic({
             </div>
         </div>
     );
-}
+};
 
 export default ProfilePic;

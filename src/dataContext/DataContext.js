@@ -1,8 +1,8 @@
 import { createContext, useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { firestoreDb, storage } from "../firebase/firebase";
 import { ref, getDownloadURL } from "firebase/storage";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 //import images
 import image1 from "../assets/images/image1.jpg";
@@ -94,7 +94,7 @@ const DataProvider = ({ children }) => {
     const [userFirstName, setUserFirstName] = useState("")
     const [userLastName, setUserLastName] = useState("")
     const [userEmail, setUserEmail] = useState("")
-    const [displayName, setDisplayName] = useState("")
+    const [userDisplayName, setUserDisplayName] = useState("")
 
     const [photos, setPhotos] = useState(initialImages);
     const [videos, setVideos] = useState([])
@@ -126,7 +126,7 @@ const DataProvider = ({ children }) => {
                 setUserFirstName(userData.firstName)
                 setUserLastName(userData.lastName)
                 setUserEmail(user.email)
-                setDisplayName(user.displayName)
+                setUserDisplayName(user.displayName)
                 // unsubscribe();
             } else {
                 // docSnap.data() will be undefined in this case
@@ -140,12 +140,30 @@ const DataProvider = ({ children }) => {
             })
         }
 
-        user && getData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user])
+        if (user) {
+            getData();
+            const unsubFirestore = onSnapshot(doc(firestoreDb, "users", user.uid), (doc) => {
+                const userData = doc.data()
+                setUserFirstName(userData.firstName)
+                setUserLastName(userData.lastName)
+            });
+
+            const unsubAuth = onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    setUserDisplayName(user.displayName);
+                } else {
+                    setUserDisplayName(null)
+                }
+            });
+            return () => {
+                unsubFirestore();
+                unsubAuth();
+            }
+        }
+    }, [user, auth])
 
     return <DataContext.Provider value={{
-        activeTag, setActiveTag, initialImages, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, photos, setPhotos, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL, displayName
+        activeTag, setActiveTag, initialImages, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, photos, setPhotos, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL, userDisplayName
     }}>
         {children}
     </DataContext.Provider>

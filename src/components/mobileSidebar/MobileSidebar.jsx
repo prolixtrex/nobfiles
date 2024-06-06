@@ -1,18 +1,16 @@
 import { useState } from "react";
-import noban from "../../assets/logo/noban.png";
-import "./mobileSidebar.css";
-import Tags from "../common/Tags";
+import Banner from "./Banner";
+import Tags from "../common/tags/Tags";
 import LogOutBtn from "../common/account/LogoutBtn";
-import Categories from "../common/Categories";
+import Categories from "../common/categories/Categories";
+import "./mobileSidebar.css";
 
 const MobileSidebar = () => {
     const [expand, setExpand] = useState(false);
 
     return (
         <aside className={`mobileSidebar ${expand ? "open" : "close"}`}>
-            <button className="profile" onClick={() => setExpand(!expand)}>
-                <img src={noban} alt="logo" />
-            </button>
+            <Banner {...{ expand, setExpand }} />
             <Categories />
             <Tags />
             <LogOutBtn />

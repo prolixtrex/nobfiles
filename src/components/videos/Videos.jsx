@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { DataContext } from "../../dataContext/DataContext";
-import Header from "../common/Header";
+import Header from "../common/header/Header";
 import "./videos.css";
 
 const Videos = () => {
