@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { firestoreDb } from "../../../firebase/firebase";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
@@ -12,28 +10,15 @@ const ForgotPassword = () => {
     const handleReset = async (e) => {
         e.preventDefault();
 
-        try {
-            const usersRef = collection(firestoreDb, "users");
-            const q = query(usersRef, where("email", "==", email));
-            const querySnapshot = await getDocs(q);
-
-            if (querySnapshot.empty) {
-                setErrorMessage(
-                    "Email not found. Please enter a registered email."
+        await sendPasswordResetEmail(auth, email)
+            .then(() => {
+                alert(
+                    "If your email is registered, you will receive a password reset link"
                 );
-            } else {
-                await sendPasswordResetEmail(auth, email)
-                    .then(() => {
-                        alert("Check your email for a password reset link");
-                    })
-                    .catch((error) => {
-                        console.log("error resetting password", error);
-                    });
-            }
-        } catch (error) {
-            console.log(error);
-            // setErrorMessage("error sending password reset", error);
-        }
+            })
+            .catch((error) => {
+                console.log("error resetting password", error);
+            });
     };
 
     return (

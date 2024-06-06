@@ -1,6 +1,10 @@
 import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../../dataContext/DataContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, deleteUser } from "firebase/auth";
+import { doc, deleteDoc } from "firebase/firestore";
+import { ref, deleteObject, listAll } from "firebase/storage";
+import { firestoreDb, storage } from "../../firebase/firebase";
 import "./header.css";
 
 const Options = () => {
@@ -14,8 +18,52 @@ const Options = () => {
         documents,
         activeTag,
         setActiveTag,
+        user,
+        setUser,
+        setLoggedIn,
     } = useContext(DataContext);
     const [filter, setFilter] = useState("All Files");
+
+    const auth = getAuth();
+    const navigate = useNavigate();
+
+    const deleteAccount = async () => {
+        if (
+            window.confirm(
+                "Are you sure you want to delete your account? This action can not be undone"
+            )
+        ) {
+            if (!user) return;
+
+            try {
+                await deleteFirestoreData(user.uid);
+
+                await deleteStorageData(user.uid);
+
+                await deleteUser(auth.currentUser);
+
+                setUser(null);
+                setLoggedIn(false);
+                console.log("user account deleted");
+                navigate("/");
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
+    const deleteFirestoreData = async (uid) => {
+        await deleteDoc(doc(firestoreDb, "users", uid));
+    };
+
+    const deleteStorageData = async (uid) => {
+        const userStorageRef = ref(storage, `user/${uid}`);
+        const listResults = await listAll(userStorageRef);
+        const deletePromises = listResults.items.map((itemRef) => {
+            return deleteObject(itemRef);
+        });
+        await Promise.all(deletePromises);
+    };
 
     const numOfFiles =
         activePage === "images"
@@ -45,7 +93,7 @@ const Options = () => {
                         <h3>Profile</h3>
                     </div>
                     <div>
-                        <button>Delete Account</button>
+                        <button onClick={deleteAccount}>Delete Account</button>
                     </div>
                 </>
             ) : (

@@ -6,7 +6,7 @@ import { BiLogIn } from "react-icons/bi";
 import "./logoutBtn.css";
 
 const Logout = () => {
-    const { setLoggedIn, setUser } = useContext(DataContext);
+    const { setLoggedIn, setUser, setProfilePicURL } = useContext(DataContext);
     // const [error, setError] = useState(null)
     const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ const Logout = () => {
                 // Sign-out successful.
                 setUser(null);
                 setLoggedIn(false);
+                setProfilePicURL("");
                 navigate("./");
             })
             .catch((error) => {

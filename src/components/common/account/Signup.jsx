@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { DataContext } from "../../../dataContext/DataContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -13,6 +13,7 @@ import "./account.css";
 const Signup = () => {
     const { setUser, setLoggedIn } = useContext(DataContext);
     const auth = getAuth();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -24,6 +25,7 @@ const Signup = () => {
     const [firebaseError, setFirebaseError] = useState(null);
 
     const handleSignup = (event) => {
+        event.preventDefault();
         if (
             firstName !== "" ||
             lastName !== "" ||
@@ -31,9 +33,8 @@ const Signup = () => {
             password !== ""
         ) {
             if (password !== confirmPassword) {
-                setConfirmPassword("Your password does not match");
+                setPasswordMissMatch("Passwords do not match");
             } else {
-                event.preventDefault();
                 createUserWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
                         // Signed up
@@ -42,6 +43,7 @@ const Signup = () => {
                         createAccountInfo(user.uid);
                         setDisplayName(user, firstName);
                         setLoggedIn(true);
+                        navigate("/");
                         // ...
                     })
                     .catch((error) => {
@@ -64,6 +66,7 @@ const Signup = () => {
             lastName:
                 lastName.charAt(0).toUpperCase() +
                 lastName.slice(1).toLowerCase(),
+            email: email,
         };
 
         await setDoc(doc(firestoreDb, "users", uid), data);
@@ -79,6 +82,7 @@ const Signup = () => {
 
     const handleInput = (caller, e) => {
         setFirebaseError("");
+        setPasswordMissMatch("");
 
         switch (caller) {
             case "fName":
@@ -112,9 +116,8 @@ const Signup = () => {
                 <div className="accountBody">
                     <form onSubmit={handleSignup}>
                         <div className="erroraccount">
-                            {firebaseError && (
-                                <p className="erroraccount">{firebaseError}</p>
-                            )}
+                            {firebaseError && <p>{firebaseError}</p>}
+                            {passwordMissMatch && <p>{passwordMissMatch}</p>}
                         </div>
                         <div>
                             <label htmlFor="firstName">First Name:</label>
@@ -172,7 +175,7 @@ const Signup = () => {
                             <input
                                 type="password"
                                 id="confirmPassword"
-                                value={password}
+                                value={confirmPassword}
                                 onChange={(e) =>
                                     handleInput("cpWord", e.target.value)
                                 }
