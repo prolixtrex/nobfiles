@@ -4,11 +4,15 @@ import { Link } from "react-router-dom";
 import noban from "../../assets/logo/noban.png";
 
 const Banner = ({ expand, setExpand }) => {
-    const { displayName } = useContext(DataContext);
+    const { userDisplayName } = useContext(DataContext);
 
     return (
         <div className="profile">
-            {expand && <Link to="/profilePage">{displayName}</Link>}
+            {expand && (
+                <div>
+                    <Link to="/profilePage">{userDisplayName}</Link>
+                </div>
+            )}
             <button className="logo" onClick={() => setExpand(!expand)}>
                 <img src={noban} alt="logo" />
             </button>
