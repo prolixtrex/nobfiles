@@ -6,10 +6,12 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
 } from "firebase/auth";
+import LoadingIndicator from "../loading/LoadingIndicator";
 import "./account.css";
 
 const Login = () => {
-    const { setLoggedIn, setUser } = useContext(DataContext);
+    const { setLoggedIn, setUser, loading, setLoading } =
+        useContext(DataContext);
     const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -36,17 +38,21 @@ const Login = () => {
 
     const handleSignIn = async (e) => {
         e.preventDefault();
+        setLoading("signIn");
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
             setFirebaseError(error.message);
+        } finally {
+            setLoading(null);
         }
     };
 
     return (
         <div className="account">
             <div className="accountWrapper">
+                {loading === "signIn" && <LoadingIndicator />}
                 <div className="accountHeader">
                     <h4>
                         <em>Welcome to Nob Files, login to continue</em>

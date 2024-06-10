@@ -24,6 +24,8 @@ const ProfilePage = () => {
         setLoggedIn,
         user,
         userDisplayName,
+        loading,
+        setLoading,
     } = useContext(DataContext);
     const [editInfo, setEditInfo] = useState(false);
     const [editPassword, setEditPassword] = useState(false);
@@ -49,6 +51,7 @@ const ProfilePage = () => {
 
     const saveEditInfo = async () => {
         const infoRef = doc(firestoreDb, "users", user.uid);
+        setLoading("infoUpdate");
 
         try {
             await updateDoc(infoRef, {
@@ -60,6 +63,7 @@ const ProfilePage = () => {
             console.log(error);
         } finally {
             setEditInfo(false);
+            setLoading(null);
         }
     };
 
@@ -79,6 +83,7 @@ const ProfilePage = () => {
 
     const savePassword = () => {
         if (newPassword === confirmPassword) {
+            setLoading("passwordUpdate");
             updatePassword(auth.currentUser, newPassword).then(() => {
                 // alert("Your password has been changed successfully");
                 signOut(auth)
@@ -86,6 +91,7 @@ const ProfilePage = () => {
                         setUser(null);
                         setLoggedIn(false);
                         navigate("/");
+                        setLoading(null);
                     })
                     .catch((error) => {
                         console.log(error);
@@ -123,6 +129,7 @@ const ProfilePage = () => {
             uploadTask.on(
                 "state_changed",
                 (snapshot) => {
+                    setLoading("profilePic");
                     const progress =
                         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log(`upload is ${progress}% done`);
@@ -139,6 +146,7 @@ const ProfilePage = () => {
                             })
                                 .then(() => {
                                     setProfilePicURL(downloadURL);
+                                    setLoading(null);
                                 })
                                 .catch((error) => {
                                     console.log(
@@ -163,6 +171,7 @@ const ProfilePage = () => {
                         pictureRef,
                         handleFileChange,
                         changeProfilePicture,
+                        loading,
                     }}
                 />
                 <ProfileInfo
@@ -181,6 +190,7 @@ const ProfilePage = () => {
                         userDisplayName,
                         displayName,
                         setDisplayName,
+                        loading,
                     }}
                 />
                 <PasswordZone
@@ -194,6 +204,7 @@ const ProfilePage = () => {
                         savePassword,
                         setEditPassword,
                         setPasswordMissmatch,
+                        loading,
                     }}
                 />
             </div>

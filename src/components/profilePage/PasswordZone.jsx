@@ -1,4 +1,5 @@
 import React from "react";
+import LoadingIndicator from "../common/loading/LoadingIndicator";
 
 const PasswordZone = ({
     editPassword,
@@ -10,12 +11,14 @@ const PasswordZone = ({
     savePassword,
     setEditPassword,
     setPasswordMissmatch,
+    loading,
 }) => {
     return (
         <div className="controls">
             {editPassword ? (
                 <div>
                     {passwordMissmatch && <div>{passwordMissmatch}</div>}
+                    {loading === "passwordUpdate" && <LoadingIndicator />}
                     <div className="passwords">
                         <label htmlFor="newPassword">New Password</label>
                         <input

@@ -1,4 +1,5 @@
 import React from "react";
+import LoadingIndicator from "../common/loading/LoadingIndicator";
 
 function ProfileInfo({
     editInfo,
@@ -14,6 +15,7 @@ function ProfileInfo({
     setEditInfo,
     displayName,
     setDisplayName,
+    isLoading,
 }) {
     return (
         <div className="profileInfo">
@@ -30,6 +32,7 @@ function ProfileInfo({
                     </div>
                 ) : (
                     <div className="editInfo">
+                        {isLoading === "infoUpdate" && <LoadingIndicator />}
                         <div>
                             First Name:{" "}
                             <input

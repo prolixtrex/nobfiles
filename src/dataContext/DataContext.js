@@ -89,6 +89,8 @@ const DataProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [activeTag, setActiveTag] = useState(tagNames[0]);
     const [profilePicURL, setProfilePicURL] = useState("")
+    const [loading, setLoading] = useState(null); //string values
+    const [alertMessage, setAlertMessage] = useState("")
     const auth = getAuth()
 
     const [userFirstName, setUserFirstName] = useState("")
@@ -163,7 +165,7 @@ const DataProvider = ({ children }) => {
     }, [user, auth])
 
     return <DataContext.Provider value={{
-        activeTag, setActiveTag, initialImages, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, photos, setPhotos, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL, userDisplayName
+        activeTag, setActiveTag, initialImages, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, photos, setPhotos, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL, userDisplayName, loading, setLoading
     }}>
         {children}
     </DataContext.Provider>

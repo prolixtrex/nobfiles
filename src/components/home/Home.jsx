@@ -22,7 +22,7 @@ const Home = () => {
                     <h2>Images</h2>
                     <Link to={"/images"}>
                         <i>
-                            See more <PiCaretDoubleRight />
+                            See All <PiCaretDoubleRight />
                         </i>
                     </Link>
                 </div>
@@ -47,7 +47,7 @@ const Home = () => {
                     <h2>Videos</h2>
                     <Link to={"/videos"}>
                         <i>
-                            See more <PiCaretDoubleRight />
+                            See All <PiCaretDoubleRight />
                         </i>
                     </Link>
                 </div>
@@ -58,7 +58,7 @@ const Home = () => {
                     <h2>Documents</h2>
                     <Link to={"/documents"}>
                         <i>
-                            See more <PiCaretDoubleRight />
+                            See All <PiCaretDoubleRight />
                         </i>
                     </Link>
                 </div>

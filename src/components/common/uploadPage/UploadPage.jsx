@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { DataContext } from "../../../dataContext/DataContext";
+import Header from "../header/Header";
 import "./uploadPage.css";
 
 const UploadPage = () => {
+    const { setActivePage } = useContext(DataContext);
     const [fileName, setFileName] = useState("");
     const [fileType, setFileType] = useState(null);
     const [addTags, setAddTags] = useState([]);
@@ -18,13 +20,16 @@ const UploadPage = () => {
     //     const upload =
     // }
 
+    useEffect(() => {
+        setActivePage("uploadPage");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
-        <main className="main">
+        <main className="main uploadPage">
+            <Header />
             <div>
-                <Link to={`/`}>Back</Link>
-            </div>
-            <div className="uploadPage">
-                <div className="header">
+                <div className="">
                     <h4>Upload files from your local storage</h4>
                 </div>
                 <div className="preview">preview file</div>

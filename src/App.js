@@ -5,7 +5,7 @@ import ImageGallery from './components/images/ImageGallery';
 import Videos from './components/videos/Videos';
 import Documents from './components/documents/Documents'
 import Sidebar from './components/sidebar/Sidebar';
-import UploadPage from './components/uploadPage/UploadPage';
+import UploadPage from './components/common/uploadPage/UploadPage';
 import Viewer from './components/viewer/Viewer';
 import MissingPage from "./components/missingPage/MissingPage";
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
@@ -17,9 +17,10 @@ import Signup from './components/common/account/Signup';
 import ProfilePage from './components/profilePage/ProfilePage';
 import ResetPassword from './components/common/account/ResetPassword';
 import ForgotPassword from './components/common/account/ForgotPassword';
+import Alert from './components/common/alert/Alert';
 
 function App() {
-  const { loggedIn } = useContext(DataContext)
+  const { loggedIn, alertMessage } = useContext(DataContext)
   const navigate = useNavigate()
   const location = useLocation()
   const baseURL = `${window.location.origin}${location.pathname}`;
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <div className="App">
+      {alertMessage && <Alert message={alertMessage} />}
       {loggedIn &&
         <>
           <Sidebar />

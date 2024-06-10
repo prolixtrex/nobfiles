@@ -1,4 +1,4 @@
-.main .uploadPage {
+.uploadPage {
     width: 700px;
     height: calc(100vh - 100px);
     border: 1px solid var(--borderColor);
@@ -10,12 +10,7 @@
 }
 
 .uploadPage .header {
-    height: 40px;
-    border-bottom: 1px solid var(--borderColor);
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row-reverse;
 }
 
 .uploadPage .preview {

@@ -101,13 +101,23 @@ const Options = () => {
 
     return (
         <div className="header">
-            {activePage === "profilePage" ? (
+            {activePage === "profilePage" || activePage === "uploadPage" ? (
                 <>
                     <div>
-                        <h3>Profile</h3>
+                        <h3>
+                            {activePage === "profilePage"
+                                ? "Profile"
+                                : "Upload files from your local storage"}
+                        </h3>
                     </div>
                     <div>
-                        <button onClick={deleteAccount}>Delete Account</button>
+                        {activePage === "profilePage" ? (
+                            <button onClick={deleteAccount}>
+                                Delete Account
+                            </button>
+                        ) : (
+                            <button onClick={() => navigate(-1)}>Back</button>
+                        )}
                     </div>
                 </>
             ) : (
@@ -120,21 +130,6 @@ const Options = () => {
                         </h4>
                     </div>
                     <div>
-                        <select
-                            name="filter"
-                            id="filter"
-                            onChange={(e) => setFilter(e.target.value)}
-                        >
-                            {tagNames.map((tag) => (
-                                <option
-                                    key={tag}
-                                    defaultValue={tag}
-                                    selected={activeTag === tag ? true : false}
-                                >
-                                    {tag}
-                                </option>
-                            ))}
-                        </select>
                         <Link to={`/upload`}>
                             <button>
                                 Add{" "}

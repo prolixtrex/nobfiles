@@ -1,16 +1,19 @@
-import React from "react";
 import { IoPersonCircleSharp } from "react-icons/io5";
+import LoadingIndicator from "../common/loading/LoadingIndicator";
 
 const ProfilePic = ({
     profilePicURL,
     pictureRef,
     handleFileChange,
     changeProfilePicture,
+    loading,
 }) => {
     return (
         <div className="profilePic">
             <div className="imageWrapper">
-                {profilePicURL ? (
+                {loading === "profilePic" ? (
+                    <LoadingIndicator />
+                ) : profilePicURL ? (
                     <img className="avater" src={profilePicURL} alt="profile" />
                 ) : (
                     <IoPersonCircleSharp className="avater" />

@@ -51,8 +51,12 @@
 .profilePic .imageWrapper {
     height: 10rem;
     width: 10rem;
-    border: 1px solid var(--borderColor);
+    border: 4px solid var(--borderColor);
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .profilePic .imageWrapper .avater {
@@ -70,6 +74,7 @@
     align-items: center;
     padding: 20px 10px;
     border-bottom: 1px solid var(--borderColor);
+    position: relative;
 }
 
 .profileInfo .editInfo {

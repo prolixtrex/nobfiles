@@ -9,10 +9,12 @@ import {
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { firestoreDb } from "../../../firebase/firebase";
+import LoadingIndicator from "../loading/LoadingIndicator";
 import "./account.css";
 
 const Signup = () => {
-    const { setUser, setLoggedIn } = useContext(DataContext);
+    const { setUser, setLoggedIn, loading, setLoading } =
+        useContext(DataContext);
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -38,6 +40,7 @@ const Signup = () => {
             if (password !== confirmPassword) {
                 setPasswordMissMatch("Passwords do not match");
             } else {
+                setLoading("signUp");
                 createUserWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
                         // Signed up
@@ -47,6 +50,7 @@ const Signup = () => {
                         setInfo(user, displayName, email);
                         setLoggedIn(true);
                         navigate("/");
+                        setLoading(null);
                         // ...
                     })
                     .catch((error) => {
@@ -115,6 +119,7 @@ const Signup = () => {
     return (
         <div className="account">
             <div className="accountWrapper">
+                {loading === "signUp" && <LoadingIndicator />}
                 <div className="accountHeader">
                     <h4>
                         <em>Create your account with Nobfiles</em>
