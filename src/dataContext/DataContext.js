@@ -1,85 +1,11 @@
 import { createContext, useState, useEffect } from "react";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { firestoreDb, storage } from "../firebase/firebase";
-import { ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL, listAll } from "firebase/storage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-//import images
-import image1 from "../assets/images/image1.jpg";
-import image2 from "../assets/images/image2.jpg";
-import image3 from "../assets/images/image3.jpg";
-import image5 from "../assets/images/image5.jpg";
-import image4 from "../assets/images/image4.jpg";
-import image6 from "../assets/images/image6.jpg";
-import image7 from "../assets/images/image7.jpg";
-import image8 from "../assets/images/image8.jpg";
-import image9 from "../assets/images/image9.jpg";
-import image10 from "../assets/images/image10.jpg";
 
 export const DataContext = createContext();
-
-const initialImages = [
-    {
-        src: image1,
-        tag: "summer",
-        title: "image1",
-        type: "image"
-    },
-    {
-        src: image2,
-        tag: "spring",
-        title: "image2",
-        type: "image"
-    },
-    {
-        src: image3,
-        tag: "winter",
-        title: "image3",
-        type: "image",
-    },
-    {
-        src: image4,
-        tag: "summer",
-        title: "image4",
-        type: "image"
-    },
-    {
-        src: image5,
-        tag: "summer",
-        title: "image5",
-        type: "image"
-    },
-    {
-        src: image6,
-        tag: "spring",
-        title: "image6",
-        type: "image"
-    },
-    {
-        src: image7,
-        tag: "winter",
-        title: "image7",
-        type: "image"
-    },
-    {
-        src: image8,
-        tag: "spring",
-        title: "image8",
-        type: "image"
-    },
-    {
-        src: image9,
-        tag: "winter",
-        title: "image9",
-        type: "image"
-    },
-    {
-        src: image10,
-        tag: "spring",
-        title: "image10",
-        type: "image"
-    },
-];
 
 const DataProvider = ({ children }) => {
     const [files, setFiles] = useState([])
@@ -98,11 +24,13 @@ const DataProvider = ({ children }) => {
     const [userEmail, setUserEmail] = useState("")
     const [userDisplayName, setUserDisplayName] = useState("")
 
-    const [photos, setPhotos] = useState(initialImages);
+    const [images, setImages] = useState([])
     const [videos, setVideos] = useState([])
     const [documents, setDocuments] = useState([])
 
-    const totalFiles = initialImages.length
+    const [uploadFileType, setUploadFileType] = useState("")
+
+    const totalFiles = images.length
 
     const handleTags = (action, name) => {
         action === "add" && tagNames.push(name)
@@ -115,6 +43,25 @@ const DataProvider = ({ children }) => {
     const handleRenameTag = (oldName, newName) => {
         tagNames[tagNames.indexOf(oldName)] = newName
     };
+
+    const loadImages = () => {
+        // const allItems = [];
+        const imageRef = ref(storage, `user/${auth.currentUser.uid}/images`)
+        listAll(imageRef).then((res) => {
+            const imagePromises = res.items.map((item) => {
+                return getDownloadURL(item).then((url) => {
+                    const title = item.name
+                    return { url, title }
+                })
+            })
+
+            Promise.all(imagePromises).then((images) => {
+                setImages(images)
+            }).catch((error) => {
+                console.error("Failed to load image", error)
+            })
+        })
+    }
 
     useEffect(() => {
         const getData = async () => {
@@ -140,6 +87,9 @@ const DataProvider = ({ children }) => {
             }).catch((error) => {
                 // alert("Unable to fetch profile picture, Please reload")
             })
+
+            loadImages();
+
         }
 
         if (user) {
@@ -165,7 +115,7 @@ const DataProvider = ({ children }) => {
     }, [user, auth])
 
     return <DataContext.Provider value={{
-        activeTag, setActiveTag, initialImages, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, photos, setPhotos, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL, userDisplayName, loading, setLoading
+        activeTag, setActiveTag, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL, userDisplayName, loading, setLoading, uploadFileType, setUploadFileType, images, setImages
     }}>
         {children}
     </DataContext.Provider>

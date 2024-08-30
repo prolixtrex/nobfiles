@@ -3,7 +3,7 @@
 // import { DataContext } from "../../dataContext/DataContext";
 import { Link } from "react-router-dom";
 
-const ImageBox = ({ src, index, moveImage, tag, title }) => {
+const ImageBox = ({ title, url }) => {
     // const { loggedIn } = useContext(DataContext);
 
     // const [, ref] = useDrag({
@@ -27,10 +27,10 @@ const ImageBox = ({ src, index, moveImage, tag, title }) => {
             // ref={(node) => loggedIn && ref(drop(node))}
             className="imageBox"
         >
-            <img src={src} alt={index} draggable />
+            <img src={url} alt={title} />
             <div className="imageInfo">
                 <p>{title}</p>
-                <p>{tag}</p>
+                {/* <p>{tag}</p> */}
             </div>
         </Link>
     );

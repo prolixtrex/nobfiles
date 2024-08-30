@@ -6,6 +6,17 @@
     align-items: center;
 }
 
+.profilePage .profileWrapper {
+    height: 98%;
+    width: 98%;
+    border: 1px solid var(--borderColor);
+    border-radius: var(--borderRadius);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
 .profilePage button {
     cursor: pointer;
     border: 1px solid var(--borderColor);
@@ -24,18 +35,6 @@
     border-radius: 5px;
     padding: var(--inputPadding);
     margin-left: 7px;
-}
-
-.profilePage .profileWrapper {
-    height: 98%;
-    width: 98%;
-    border: 1px solid var(--borderColor);
-    border-radius: var(--borderRadius);
-    padding: 0 0.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 10px;
 }
 
 .profileWrapper .profilePic {

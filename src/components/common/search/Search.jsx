@@ -3,14 +3,14 @@ import { DataContext } from "../../../dataContext/DataContext";
 import "./search.css";
 
 const Search = () => {
-    const { initialImages, setPhotos } = useContext(DataContext);
+    const { images, setImages } = useContext(DataContext);
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        const result = initialImages.filter((data) =>
-            data.title.toLowerCase().includes(search.toLowerCase())
+        const result = images.filter((image) =>
+            image.title.toLowerCase().includes(search.toLowerCase())
         );
-        setPhotos(result);
+        setImages(result);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 

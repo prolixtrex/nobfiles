@@ -21,7 +21,7 @@
 
 .header button {
     padding: 5px 25px;
-    border-radius: 10px;
+    border-radius: var(--buttonRadius);
     background-color: var(--backgroundColor);
     border: 1px solid var(--borderColor);
     cursor: pointer;

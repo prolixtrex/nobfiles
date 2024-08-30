@@ -12,8 +12,8 @@ const Options = () => {
         tagNames,
         activePage,
         initialImages,
-        setPhotos,
-        photos,
+        setImages,
+        images,
         videos,
         documents,
         activeTag,
@@ -21,6 +21,7 @@ const Options = () => {
         user,
         setUser,
         setLoggedIn,
+        setUploadFileType,
     } = useContext(DataContext);
     const [filter, setFilter] = useState("All Files");
 
@@ -81,7 +82,7 @@ const Options = () => {
 
     const numOfFiles =
         activePage === "images"
-            ? photos.length
+            ? images.length
             : activePage === "videos"
             ? videos.length
             : documents.length;
@@ -92,9 +93,9 @@ const Options = () => {
             const filtered = initialImages.filter((photo) =>
                 photo.tag.includes(filter)
             );
-            setPhotos(filtered);
+            setImages(filtered);
         } else {
-            setPhotos(initialImages);
+            setImages(images);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter]);
@@ -131,7 +132,11 @@ const Options = () => {
                     </div>
                     <div>
                         <Link to={`/upload`}>
-                            <button>
+                            <button
+                                onClick={() =>
+                                    setUploadFileType(`${activePage}`)
+                                }
+                            >
                                 Add{" "}
                                 {activePage !== "home" ? activePage : "Files"}
                             </button>

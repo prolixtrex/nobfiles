@@ -7,7 +7,7 @@ import "./categories.css";
 import { Link } from "react-router-dom";
 
 const Categories = () => {
-    const { activePage, photos, videos, documents } = useContext(DataContext);
+    const { activePage, images, videos, documents } = useContext(DataContext);
 
     return (
         <div className="categories">
@@ -29,7 +29,7 @@ const Categories = () => {
                                 <p>Photos</p>
                             </div>
                             <p style={{ justifySelf: "flex-end" }}>
-                                {photos?.length}
+                                {images?.length}
                             </p>
                         </button>
                     </Link>

@@ -40,10 +40,6 @@ const ProfilePage = () => {
     const auth = getAuth();
     const navigate = useNavigate();
 
-    // Create a child reference
-    const imagesRef = ref(storage, "images");
-    // imagesRef now points to 'images'
-
     useEffect(() => {
         setActivePage("profilePage");
         // eslint-disable-next-line react-hooks/exhaustive-deps

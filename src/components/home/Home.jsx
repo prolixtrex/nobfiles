@@ -6,7 +6,7 @@ import "./home.css";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-    const { setActivePage, photos, videos, documents } =
+    const { setActivePage, images, videos, documents } =
         useContext(DataContext);
 
     useEffect(() => {
@@ -27,13 +27,13 @@ const Home = () => {
                     </Link>
                 </div>
                 <div className="section-image">
-                    {photos.slice(0, 6).map((image, index) => (
+                    {images.map((image, index) => (
                         <Link
                             key={index}
                             to={`/${image.title}`}
                             className="img"
                         >
-                            <img src={image.src} alt={image.name} />
+                            <img src={image.url} alt={image.title} />
                             <div className="info">
                                 <p>{image.title}</p>
                                 <p>{image.tag}</p>
