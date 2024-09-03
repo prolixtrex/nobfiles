@@ -36,6 +36,13 @@
     padding: 0 3px;
 }
 
+.imageBox .imageInfo p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
 @media (max-width: 612px) {
     .imageContainer .images {
         justify-content: center;

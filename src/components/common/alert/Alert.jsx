@@ -1,10 +1,27 @@
-import React from "react";
+import { useContext } from "react";
+import { DataContext } from "../../../dataContext/DataContext";
+import "./alert.css";
 
-const Alert = ({ message }) => {
+const Alert = ({ action, setResp }) => {
+    const { alertMessage, setAlertMessage } = useContext(DataContext);
+
+    const cancel = () => {
+        setAlertMessage("");
+        setResp("");
+    };
+
     return (
-        <div>
-            <div className="message">
-                <p>{message}</p>
+        <div className="alert">
+            <div className="alert-body">
+                <div className="message">
+                    <p>{alertMessage}</p>
+                </div>
+                <div className="actionBtn">
+                    {action !== "" && (
+                        <button onClick={() => setResp(action)}>Confirm</button>
+                    )}
+                    <button onClick={cancel}>Cancel</button>
+                </div>
             </div>
         </div>
     );

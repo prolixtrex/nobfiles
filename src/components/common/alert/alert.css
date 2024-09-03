@@ -1,0 +1,47 @@
+.alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--backgroundColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+.alert .alert-body {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    padding: 10px 20px;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    background-color: var(--borderColor);
+    text-align: center;
+    border-radius: var(--borderRadius);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.alert .actionBtn {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.alert button {
+    padding: 5px 25px;
+    border-radius: var(--buttonRadius);
+    background-color: var(--borderColor);
+    border: 1px solid whitesmoke;
+    cursor: pointer;
+}
+
+.alert button:hover {
+    background-color: whitesmoke;
+}

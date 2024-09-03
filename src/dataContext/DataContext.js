@@ -17,6 +17,7 @@ const DataProvider = ({ children }) => {
     const [profilePicURL, setProfilePicURL] = useState("")
     const [loading, setLoading] = useState(null); //string values
     const [alertMessage, setAlertMessage] = useState("")
+    const [alertResp, setAlertResp] = useState(false)
     const auth = getAuth()
 
     const [userFirstName, setUserFirstName] = useState("")
@@ -96,13 +97,13 @@ const DataProvider = ({ children }) => {
             getData();
             const unsubFirestore = onSnapshot(doc(firestoreDb, "users", user.uid), (doc) => {
                 const userData = doc.data()
-                setUserFirstName(userData.firstName)
-                setUserLastName(userData.lastName)
+                setUserFirstName(userData?.firstName)
+                setUserLastName(userData?.lastName)
             });
 
             const unsubAuth = onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    setUserDisplayName(user.displayName);
+                    setUserDisplayName(user?.displayName);
                 } else {
                     setUserDisplayName(null)
                 }
@@ -115,7 +116,7 @@ const DataProvider = ({ children }) => {
     }, [user, auth])
 
     return <DataContext.Provider value={{
-        activeTag, setActiveTag, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL, userDisplayName, loading, setLoading, uploadFileType, setUploadFileType, images, setImages
+        activeTag, setActiveTag, totalFiles, user, setUser, loggedIn, setLoggedIn, videos, documents, files, setFiles, tagNames, setTagsNames, handleTags, handleRenameTag, activePage, setActivePage, userFirstName, userLastName, userEmail, profilePicURL, setProfilePicURL, userDisplayName, loading, setLoading, uploadFileType, setUploadFileType, images, setImages, alertMessage, setAlertMessage
     }}>
         {children}
     </DataContext.Provider>

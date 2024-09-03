@@ -17,10 +17,9 @@ import Signup from './components/common/account/Signup';
 import ProfilePage from './components/profilePage/ProfilePage';
 import ResetPassword from './components/common/account/ResetPassword';
 import ForgotPassword from './components/common/account/ForgotPassword';
-import Alert from './components/common/alert/Alert';
 
 function App() {
-  const { loggedIn, alertMessage } = useContext(DataContext)
+  const { loggedIn } = useContext(DataContext)
   const navigate = useNavigate()
   const location = useLocation()
   const baseURL = `${window.location.origin}${location.pathname}`;
@@ -34,7 +33,6 @@ function App() {
 
   return (
     <div className="App">
-      {alertMessage && <Alert message={alertMessage} />}
       {loggedIn &&
         <>
           <Sidebar />

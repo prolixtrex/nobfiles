@@ -6,9 +6,9 @@ import Header from "../header/Header";
 import "./uploadPage.css";
 
 const UploadPage = () => {
-    const { setActivePage, user, uploadFileType, setImageURL } =
+    const { setActivePage, user, uploadFileType, setImages, images } =
         useContext(DataContext);
-    const [images, setImages] = useState([]);
+    const [selectedImages, setSelectedImages] = useState([]);
     const [previews, setPreviews] = useState([]);
     const [progresses, setProgresses] = useState([]);
 
@@ -19,7 +19,7 @@ const UploadPage = () => {
 
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
-        setImages(files);
+        setSelectedImages(files);
 
         const filePreviews = files.map((file) => URL.createObjectURL(file));
         setPreviews(filePreviews);
@@ -29,7 +29,7 @@ const UploadPage = () => {
     };
 
     const handleUpload = () => {
-        images.forEach((image, index) => {
+        selectedImages.forEach((image, index) => {
             const storageRef = ref(
                 storage,
                 `user/${user.uid}/images/${image.name}`
@@ -56,7 +56,7 @@ const UploadPage = () => {
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then(
                         (downloadURL) => {
-                            setImageURL(downloadURL);
+                            setImages([...images, downloadURL]);
                             setPreviews((prevState) => {
                                 const newPreviews = [...prevState];
                                 newPreviews[index] = downloadURL;

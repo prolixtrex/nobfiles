@@ -22,24 +22,27 @@
     padding: 0 10px;
 }
 
-.viewer .viewer-header button {
+.viewer button {
     background-color: transparent;
     border: 1px solid var(--borderColor);
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
-}
-
-.viewer .viewer-image {
-    width: 100%;
-    height: calc(100% - 40px);
-    padding: 10px 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.viewer .viewer-image img {
+.viewer .viewer-body {
+    width: 100%;
+    height: calc(100% - 40px);
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.viewer .viewer-body img {
     max-height: 100%;
 }
 
